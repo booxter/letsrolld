@@ -3,6 +3,7 @@ import datetime
 import math
 import sys
 import time
+
 import traceback
 
 from sqlalchemy import func, select, or_
@@ -26,7 +27,7 @@ _NOW = datetime.datetime.now()
 _MIN_REFRESH_FREQUENCY = datetime.timedelta(days=180)
 
 
-_MODEL_TO_THRESHOLD = {
+MODEL_TO_THRESHOLD = {
     models.Film: datetime.timedelta(days=7),
     models.Director: datetime.timedelta(days=1),
 }

@@ -21,6 +21,10 @@ dependencies = [
     "Flask-Sqlalchemy>=3.1.1",
     "pycountry>=23.12.11",
     "openapi-python-client>=0.20.0",
+    "types-Flask-Cors>=4.0.0.20240523",
+    "mypy>=1.10.0",
+    "types-beautifulsoup4>=4.12.0.20240511",
+    "types-requests>=2.32.0.20240602",
 ]
 requires-python = ">=3.11,<3.12"
 readme = "README.md"
@@ -54,3 +58,10 @@ cleanup = "letsrolld.cmd.cleanup:main"
 webapp = "letsrolld.webapi.app:main"
 lcli = "letsrolld.webcli.cli:cli"
 swagger = "letsrolld.webapi.app:swagger"
+
+[[tool.mypy.overrides]]
+module = [
+    "flask_restful_swagger_3",
+    "simplejustwatchapi"
+]
+ignore_missing_imports = true

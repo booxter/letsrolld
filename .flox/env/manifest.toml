@@ -27,6 +27,7 @@ moreutils.pkg-path = "moreutils"
 openapi-generator-cli.pkg-path = "openapi-generator-cli"
 pycountry.pkg-path = "python311Packages.pycountry"
 act.pkg-path = "act"
+pip.pkg-path = "python311Packages.pip"
 # hello.pkg-path = "hello"
 # nodejs = { version = "^18.4.2", pkg-path = "nodejs_18" }
 

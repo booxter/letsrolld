@@ -39,6 +39,9 @@
       "pdm": {
         "pkg-path": "pdm"
       },
+      "pip": {
+        "pkg-path": "python311Packages.pip"
+      },
       "pre-commit": {
         "pkg-path": "pre-commit"
       },
@@ -420,6 +423,35 @@
           "pname": "pdm",
           "unfree": false,
           "version": "2.10.3"
+        },
+        "input": {
+          "attrs": {
+            "lastModified": 1716576784,
+            "narHash": "sha256-zLNbgqclRnQdhp/uw7v0SnSRC9KPECJRMxuxXeWOdkw=",
+            "owner": "NixOS",
+            "repo": "nixpkgs",
+            "rev": "060b6d4e71327fc1870f7759fc6980cadc17601c",
+            "type": "github"
+          },
+          "fingerprint": "008ff148973bd338c38cd51c2096fada84e3f9df0517c51562fdadf315a845f5",
+          "url": "github:NixOS/nixpkgs/060b6d4e71327fc1870f7759fc6980cadc17601c"
+        },
+        "priority": 5
+      },
+      "pip": {
+        "attr-path": [
+          "legacyPackages",
+          "aarch64-darwin",
+          "python311Packages",
+          "pip"
+        ],
+        "info": {
+          "broken": false,
+          "description": "The PyPA recommended tool for installing Python packages",
+          "license": null,
+          "pname": "pip",
+          "unfree": false,
+          "version": "23.2.1"
         },
         "input": {
           "attrs": {
@@ -965,6 +997,35 @@
           "pname": "pdm",
           "unfree": false,
           "version": "2.10.3"
+        },
+        "input": {
+          "attrs": {
+            "lastModified": 1716576784,
+            "narHash": "sha256-zLNbgqclRnQdhp/uw7v0SnSRC9KPECJRMxuxXeWOdkw=",
+            "owner": "NixOS",
+            "repo": "nixpkgs",
+            "rev": "060b6d4e71327fc1870f7759fc6980cadc17601c",
+            "type": "github"
+          },
+          "fingerprint": "008ff148973bd338c38cd51c2096fada84e3f9df0517c51562fdadf315a845f5",
+          "url": "github:NixOS/nixpkgs/060b6d4e71327fc1870f7759fc6980cadc17601c"
+        },
+        "priority": 5
+      },
+      "pip": {
+        "attr-path": [
+          "legacyPackages",
+          "x86_64-darwin",
+          "python311Packages",
+          "pip"
+        ],
+        "info": {
+          "broken": false,
+          "description": "The PyPA recommended tool for installing Python packages",
+          "license": null,
+          "pname": "pip",
+          "unfree": false,
+          "version": "23.2.1"
         },
         "input": {
           "attrs": {

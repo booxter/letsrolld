@@ -11,7 +11,7 @@ dependencies = [
     "requests",
     # TODO: vendorize this dependency, or otherwise replace it
     # TODO: update to 0.14.0 that changed offers API
-    "simple-justwatch-python-api==0.13.0",
+    "simple-justwatch-python-api==0.14",
     "SQLAlchemy>=2.0.27",
     "alembic>=1.13.1",
     "flask-restful-swagger-3 @ git+https://github.com/booxter/flask-restful-swagger-3@master",

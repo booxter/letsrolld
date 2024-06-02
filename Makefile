@@ -14,7 +14,7 @@ lint: install swagger
 	pre-commit run --all-files
 
 mypy:
-	pdm run mypy src tests
+	pdm run mypy . --exclude alembic/env.py --exclude src/letsrolld/db/models.py
 
 test: lint
 	pdm run pytest

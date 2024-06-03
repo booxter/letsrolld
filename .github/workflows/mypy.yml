@@ -1,0 +1,20 @@
+name: mypy
+on: [pull_request]
+jobs:
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+      - name: Check with mypy
+        run: |
+          # TODO: make this work with exclusion rules from pyproject.toml
+          pip freeze
+          mypy . --exclude alembic/env.py --exclude src/letsrolld/db/models.py

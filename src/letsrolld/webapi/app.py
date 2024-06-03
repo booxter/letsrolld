@@ -230,7 +230,7 @@ def main():
     app.run(port=8000, debug=True)
 
 
-def swagger():
+def swagger_json():
     api = _api()
     with app.test_request_context():
         swagger_doc = create_open_api_resource(api.open_api_object)().get()

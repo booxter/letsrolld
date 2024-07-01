@@ -6,6 +6,6 @@
     "sass": "^1.76.0"
   },
   "dependencies": {
-    "lucide": "^0.377.0"
+    "lucide": "^0.400.0"
   }
 }

@@ -84,6 +84,9 @@ class Film(Base):
     countries: Mapped[list[Country]] = relationship(
         secondary=film_country_association_table
     )
+    offers: Mapped[list[Offer]] = relationship(
+        secondary="film_offer_association_table"
+    )
 
     directors = relationship(
         "Director",

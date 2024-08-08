@@ -157,6 +157,7 @@ class FilmResource(Resource):
                 "required": False,
                 "schema": {"type": "integer", "default": 10},
             },
+            # TODO: make filters accept multiple values
             {
                 "name": "genre",
                 "in": "query",

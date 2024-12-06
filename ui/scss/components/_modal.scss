@@ -16,22 +16,30 @@
     height: 60vh;
     margin: 20vh auto;
     border: 1px solid #1e033b;
-    background-color: rgba(30, 3, 59, 0.5);
-    box-shadow: 0 5px 8px 0 rgba(30, 3, 59, 0.2), 0 7px 20px 0 rgba(30, 3, 59, 0.2);
+    background-color: rgba($color-primary, 0.6);
+    box-shadow: 0 5px 8px 0 rgba($color-primary, 0.2), 0 7px 20px 0 rgba($color-primary, 0.2);
     animation: modalopen 2s;
 
     .modal-header {
         text-transform: uppercase;
         color: #1e033b;
         font-size: 25px;
+        // border: 1px solid teal;
+        height: 15%;
 
         .closeBtn {
             color: #999;
             float: right;
             font-size: 40px;
             padding-top: 10px;
+            // height: calc(60vh/5);
+            // padding-top: calc((60vh/5 - 60px)/2 - 8px);
+            // right: 0;
             padding-right: 20px;
+            // height: calc(100% - 40px);
+            // padding: 20px;
             cursor: pointer;
+            // border: 1px solid green;
 
             &:hover, &:focus {
                 color: #1e033b;
@@ -41,12 +49,15 @@
         }
 
         h3 {
+            // border: 1px solid red;
             padding: 20px 30px;
             background-color: #eee;
         }
     }
     .modal-body {
-        height: 100%;
+        // border: 1px solid yellow;
+        height: calc(80% - 20px);
+        margin-bottom: 20px;
     }
 }
 

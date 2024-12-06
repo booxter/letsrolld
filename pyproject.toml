@@ -44,6 +44,7 @@ build-backend = "pdm.backend"
 distribution = true
 
 [project.scripts]
+fetch-lb-list = "letsrolld.cmd.fetch_lb_list:main"
 fetch-directors = "letsrolld.cmd.fetch_directors:main"
 populate-directors = "letsrolld.cmd.populate_directors:main"
 update-directors = "letsrolld.cmd.update:directors_main"

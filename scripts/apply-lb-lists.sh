@@ -20,7 +20,6 @@ for url in "${urls[@]}"; do
   echo "Applying list from url: $url"
   fetch-lb-list -N -u $url -o $tdir/list.csv
   fetch-directors -N -i $tdir/list.csv -o $tdir/directors.csv
-  cat $tdir/directors.csv
   populate-directors -d $tdir/directors.csv
   make run-all  # fetch all films after each list so that "film already known" heuristic considers just added directors/movies
 done

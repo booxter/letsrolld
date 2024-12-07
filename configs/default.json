@@ -53,5 +53,19 @@
 		"min_rating": "3.75",
 		"min_length": 60,
 		"genre": "documentary"
+	},
+	"Obscure": {
+		"max_movies": 3,
+		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
+		"min_rating": "3.35",
+		"max_rating": "3.75",
+		"min_length": 30,
+		"exclude_genres": ["adult"]
+	},
+	"Adult": {
+		"max_movies": 3,
+		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY", "DISC"],
+		"min_length": 30,
+		"genre": "adult"
 	}
 }

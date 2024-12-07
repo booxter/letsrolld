@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 urls=(
+  # "https://letterboxd.com/sr0man/list/erotic/"
+  "https://letterboxd.com/dustin_b/list/films-i-own-the-complete-mega-load/"
   "https://letterboxd.com/smlibrary/list/okay/"
   "https://letterboxd.com/retinaburn/list/the-most-comprehensive-list-of-hong-kong/"
   "https://letterboxd.com/wolfman07/list/every-horror-film-ever-made-1/"
@@ -11,8 +13,6 @@ urls=(
   "https://letterboxd.com/mishima24/list/the-most-comprehensive-list-of-japanese-movies/"
   "https://letterboxd.com/elmiko_/list/every-animated-film-made-from-1878-present/"
   "https://letterboxd.com/clowchan/list/every-horror-film-made-from-1895-present/"
-  "https://letterboxd.com/sr0man/list/erotic/"
-  "https://letterboxd.com/dustin_b/list/films-i-own-the-complete-mega-load/"
 )
 
 tdir=$(mktemp -d)

@@ -44,6 +44,8 @@ build-backend = "pdm.backend"
 distribution = true
 
 [project.scripts]
+fetch-countries = "letsrolld.cmd.fetch_countries:main"
+fetch-country-list = "letsrolld.cmd.fetch_country_list:main"
 fetch-lb-list = "letsrolld.cmd.fetch_lb_list:main"
 fetch-directors = "letsrolld.cmd.fetch_directors:main"
 populate-directors = "letsrolld.cmd.populate_directors:main"

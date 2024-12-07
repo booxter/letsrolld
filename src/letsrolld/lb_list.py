@@ -13,7 +13,14 @@ class MovieList(BaseObject):
             print(f"Fetching page {page}")
             url = f"{self.url}/page/{page}/"
 
-            content = http.get_url(url)
+            while True:
+                try:
+                    content = http.get_url(url)
+                    break
+                except Exception as e:
+                    print(f"Failed to fetch {url}: {e}")
+                    continue
+
             soup = BeautifulSoup(content, "html.parser")
 
             found = False

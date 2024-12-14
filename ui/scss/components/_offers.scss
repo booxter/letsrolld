@@ -1,0 +1,163 @@
+// links to important offers (when opened inside the movie card: icon + tooltip)
+.offers {
+    // border: 1px solid red;
+    .movie-offers-list {
+        // border: 1px solid orange;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+
+        .movie-link-offer {
+            // border: 1px solid blue;
+            display: inline-block;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-decoration: none;
+            color: $color-dark;
+            position: relative;
+
+            &:hover {
+                text-decoration: underline;
+                text-decoration-color: $color-grey-dark-3;
+                background-color: rgba($color-primary, .1);
+                border-radius: 5px;
+                // cursor: default;
+
+                .offer-name-tooltip {
+                    visibility: visible;
+                }
+            }
+
+            .offer-name-tooltip {
+                /* hide by default */
+                visibility: hidden;
+                /* style */
+                font-size: 12px;
+                line-height: 12px;
+                font-weight: bold;
+                background-color: rgba($color-grey-light-2, 0.7);
+                color: $color-primary;
+                text-align: center;
+                border-radius: 3px;
+                padding: 3px 5px;
+                /* Position the tooltip */
+                position: absolute;
+                top: 30px;
+                left: 0;
+                z-index: 1;
+            }
+
+            &:has(.logo-img.logo-physical) {
+                &:hover {
+                    text-decoration: none;
+                    color: $color-dark;
+                    text-decoration-color: $color-dark;
+                }
+            }
+
+            .title-link {
+                color: $color-dark;
+                font-weight: bold;
+                font-size: 18px;
+
+                &:hover {
+                    color: $color-grey-dark-3;
+                }
+            }
+
+            .brand-icon {
+                display: block;
+                // margin-right: 5px;
+                width: 35px;
+                height: 35px;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 3px;
+
+                .logo-img {
+                    width: 35px;
+                    height: 35px;
+                }
+                .logo-img.logo-criterionchannel {
+                    width: 25px;
+                    height: 25px;
+                    margin: 5px;
+                }
+                .logo-img.logo-kanopy, .logo-img.logo-vudu, .logo-img.logo-physical {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                .logo-img.logo-physical {
+                    width: 16px;
+                    height: 16px;
+                }
+
+                &:has(.logo-img.logo-kanopy, .logo-img.logo-vudu, .logo-img.logo-physical) {
+                    width: 25px;
+                    height: 25px;
+                    margin: 5.5px;
+                }
+
+                &:has(.logo-img.logo-kanopy, .logo-img.logo-physical) {
+                    background-color: black;
+                }
+
+                &:has(.logo-img.logo-vudu) {
+                    background-color: #2d6dbe;
+                }
+            }
+        }
+    }
+
+    .movie-link-show_more {
+        // border: 1px dotted yellow;
+        color: $color-primary;
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-color: $color-primary;
+        }
+    }
+}
+
+// TODO: offers should fit inside the modal body
+// links to all offers (when opened inside the modal)
+.offers-all {
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 10px;
+    color: white;
+    font-size: 36px;
+    width: 95%;
+    margin: 0 auto 20px auto;
+
+    .movie-link {
+        color: white;
+        text-decoration: none;
+        background-color: rgba($color-primary, 0.7);
+        border-radius: 5px;
+        padding: 7px 15px;
+
+        &:hover {
+            // text-decoration: underline;
+            // text-decoration-color: white;
+            color: $color-primary;
+            // text-decoration: none;
+            background-color: rgba(white, 0.8);
+        }
+    }
+    .movie-link-physical:hover {
+        text-decoration: none;
+    }
+}

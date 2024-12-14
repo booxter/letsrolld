@@ -129,6 +129,7 @@ body {
 .movie-image {
   width: 90%;
   margin: 0;
+  margin-bottom: 20px;
   height: max-content;
   background-color: rgba(30, 3, 59, 0.8);
   border-radius: 5px;
@@ -219,14 +220,15 @@ body {
   height: 60vh;
   margin: 20vh auto;
   border: 1px solid #1e033b;
-  background-color: rgba(30, 3, 59, 0.5);
+  background-color: rgba(30, 3, 59, 0.6);
   box-shadow: 0 5px 8px 0 rgba(30, 3, 59, 0.2), 0 7px 20px 0 rgba(30, 3, 59, 0.2);
-  animation: modalopen 0.5s;
+  animation: modalopen 2s;
 }
 .modal-content .modal-header {
   text-transform: uppercase;
   color: #1e033b;
   font-size: 25px;
+  height: 15%;
 }
 .modal-content .modal-header .closeBtn {
   color: #999;
@@ -246,7 +248,8 @@ body {
   background-color: #eee;
 }
 .modal-content .modal-body {
-  height: 100%;
+  height: calc(80% - 20px);
+  margin-bottom: 20px;
 }
 
 @keyframes modalopen {
@@ -259,6 +262,136 @@ body {
     scale: 1;
   }
 }
+.offers .movie-offers-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+.offers .movie-offers-list .movie-link-offer {
+  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-decoration: none;
+  color: #000000;
+  position: relative;
+}
+.offers .movie-offers-list .movie-link-offer:hover {
+  text-decoration: underline;
+  text-decoration-color: #333;
+  background-color: rgba(30, 3, 59, 0.1);
+  border-radius: 5px;
+}
+.offers .movie-offers-list .movie-link-offer:hover .offer-name-tooltip {
+  visibility: visible;
+}
+.offers .movie-offers-list .movie-link-offer .offer-name-tooltip {
+  /* hide by default */
+  visibility: hidden;
+  /* style */
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: bold;
+  background-color: rgba(238, 238, 238, 0.7);
+  color: #1e033b;
+  text-align: center;
+  border-radius: 3px;
+  padding: 3px 5px;
+  /* Position the tooltip */
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 1;
+}
+.offers .movie-offers-list .movie-link-offer:has(.logo-img.logo-physical):hover {
+  text-decoration: none;
+  color: #000000;
+  text-decoration-color: #000000;
+}
+.offers .movie-offers-list .movie-link-offer .title-link {
+  color: #000000;
+  font-weight: bold;
+  font-size: 18px;
+}
+.offers .movie-offers-list .movie-link-offer .title-link:hover {
+  color: #333;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3px;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon .logo-img {
+  width: 35px;
+  height: 35px;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon .logo-img.logo-criterionchannel {
+  width: 25px;
+  height: 25px;
+  margin: 5px;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon .logo-img.logo-kanopy, .offers .movie-offers-list .movie-link-offer .brand-icon .logo-img.logo-vudu, .offers .movie-offers-list .movie-link-offer .brand-icon .logo-img.logo-physical {
+  width: 20px;
+  height: 20px;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon .logo-img.logo-physical {
+  width: 16px;
+  height: 16px;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon:has(.logo-img.logo-kanopy, .logo-img.logo-vudu, .logo-img.logo-physical) {
+  width: 25px;
+  height: 25px;
+  margin: 5.5px;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon:has(.logo-img.logo-kanopy, .logo-img.logo-physical) {
+  background-color: black;
+}
+.offers .movie-offers-list .movie-link-offer .brand-icon:has(.logo-img.logo-vudu) {
+  background-color: #2d6dbe;
+}
+.offers .movie-link-show_more {
+  color: #1e033b;
+}
+.offers .movie-link-show_more:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #1e033b;
+}
+
+.offers-all {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  row-gap: 10px;
+  color: white;
+  font-size: 36px;
+  width: 95%;
+  margin: 0 auto 20px auto;
+}
+.offers-all .movie-link {
+  color: white;
+  text-decoration: none;
+  background-color: rgba(30, 3, 59, 0.7);
+  border-radius: 5px;
+  padding: 7px 15px;
+}
+.offers-all .movie-link:hover {
+  color: #1e033b;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.offers-all .movie-link-physical:hover {
+  text-decoration: none;
+}
+
 .navbar {
   width: 100vw;
   position: fixed;

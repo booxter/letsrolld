@@ -1,4 +1,6 @@
 import Modal from "/scripts/modal.js";
+import Offers from "/scripts/offers.js";
+import { important_offers } from "/scripts/variables.js";
 
 export default class Movie {
     constructor(title, description, year, rating, runtime, lb_url, jw_url, trailer_url, genres, countries, offers, directors) {
@@ -11,10 +13,14 @@ export default class Movie {
         this.jw_url = jw_url;
         this.trailer_url = trailer_url;
         this.genres = this.getListHTML(genres, "movie-genres-list");
-        this.countries = this.getFlags(countries, "countries-list");
-        // TODO: expose urls
-        this.offers = this.getListHTML(offers.map(o => o.name), "movie-offers-list");
-        this.directors = directors.map(d => d.name);
+        // TODO: handle null flag
+        this.countries = this.getListHTML(countries.map(c => c.flag + " " + c.name), "movie-countries-list");
+        /*
+        keys: name, url, logo
+        logo can be url (string) or null
+        */
+        this.offers = offers;
+        this.directors = directors;
         this.cover_url = "img/movie_temp.jpg";
     }
 
@@ -46,13 +52,49 @@ export default class Movie {
             const imgCaption = this.createMovieElemHTML("figcaption", "movie-image-caption", "Trailer &#10162;");
             cover.appendChild(imgCaption);
 
-            cover.addEventListener("click", () => new Modal(this.title, this.trailer_url).fillInModal());
+            cover.addEventListener("click", () => new Modal(this.title, this.trailer_url, null).fillInModal());
         }
 
-        const offers = this.createListWithTitle("offers", this.offers);
-
         movieLeft.appendChild(cover);
-        movieLeft.appendChild(offers);
+
+        // other services -> open in modal, simple list with no logos
+        if (this.offers.length > 0) {
+            const movie_offers = new Offers(this.offers);
+
+            const movie_offers_all = movie_offers.getAllOffers();
+            console.log(`All offers from Offers class: ${movie_offers_all.length}`);
+            // movie_offers_all.map(o => console.log(o));
+
+            const movie_offers_important = movie_offers.filterImportant();
+            console.log(`Important offers from Offers class: ${movie_offers_important.length}`);
+
+            // TODO: rename function to getOffersElement
+            const offers_el = this.getOffers(movie_offers_important, "movie-offers-list");
+
+            const offers = document.createElement('div');
+            offers.classList.add("offers");
+
+            // console.log(`my_offers: ${movie_important_offers.length}, all_offers: ${this.offers.length}`);
+
+            // if we have non-important offers
+            if (offers_el) {
+                offers.appendChild(offers_el);
+
+                // console.log(`Offers_el number of childs:${offers_el.childNodes.length}`);
+
+                if (movie_offers_important.length < movie_offers_all.length) {
+                    // TODO: make reusable
+                    const moreLink = this.createLinkElem(null, "show_more", "show more →");
+                    moreLink.addEventListener("click", () => new Modal("Where to watch", null, movie_offers_all).fillInModal());
+                    offers.appendChild(moreLink);
+                }
+            } else {
+                const moreLink = this.createLinkElem(null, "show_more", "where to watch →");
+                moreLink.addEventListener("click", () => new Modal("Where to watch", null, movie_offers_all).fillInModal());
+                offers.appendChild(moreLink);
+            }
+            movieLeft.appendChild(offers);
+        }
 
         return movieLeft;
     }
@@ -143,6 +185,35 @@ export default class Movie {
         return list;
     }
 
+    // TODO: move this into separate module
+    // expects offers object that has name and url fields
+    getOffers(offers, name) {
+        const offersList = document.createElement("div");
+        offersList.classList.add(name);
+
+        offers.map(({name, url, logo} = offer) => {
+            const link = this.createLinkElem(url, "offer", null);
+
+            // add icon to the link
+            const icon = document.createElement("span");
+            icon.classList.add("brand-icon");
+            icon.innerHTML = `<img id="svg-${name}" src=${logo} class="logo-img logo-${name} alt="Logo for ${name} streaming service" />`;
+            const tooltip = document.createElement("span");
+            tooltip.classList.add("offer-name-tooltip");
+            tooltip.innerText = name;
+            link.appendChild(icon);
+            link.appendChild(tooltip);
+
+            offersList.appendChild(link);
+        })
+
+        if (offersList.childNodes.length === 0) {
+            return null
+        }
+
+        return offersList;
+    }
+
     getListHTML(arr, name) {
         let result = "";
 
@@ -191,13 +262,25 @@ export default class Movie {
         return button;
     }
 
-    createLinkElem(link, name, linkText) {
+    createLinkElem(link, name, text) {
         const linkElem = document.createElement('a');
-        linkElem.setAttribute("href", link);
-        linkElem.setAttribute("target", "_blank");
+
+        // url can be null (the most common example: a physical offer)
+        if (link !== null) {
+            linkElem.setAttribute("href", link);
+            linkElem.setAttribute("target", "_blank");
+        }
+
         linkElem.classList.add("movie-link");
         linkElem.classList.add(`movie-link-${name}`);
-        linkElem.innerText = linkText;
+
+        if(text) {
+            const linkText = document.createElement("span");
+            linkText.classList.add("title-link");
+            linkText.innerText = text;
+            linkElem.appendChild(linkText);
+        }
+
         return linkElem;
     }
 

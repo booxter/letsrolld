@@ -89,11 +89,20 @@ def main():
             csvfile.seek(0, os.SEEK_END)
 
         for i, director_ in enumerate(get_directors_by_films(film_list), start=1):
-            if director_.base_url in directors:
-                print(f"Skipping director #{i}: {director_.name}")
-                sys.stdout.flush()
-                continue
-            print(f"Adding director #{i}: {director_.name}")
+            while True:
+                try:
+                    if director_.base_url in directors:
+                        print(f"Skipping director #{i}: {director_.name}")
+                        sys.stdout.flush()
+                        continue
+                    print(f"Adding director #{i}: {director_.name}")
+                    break
+                except Exception as e:
+                    traceback.print_exception(e)
+                    print(f"Retrying in {_SEC_WAIT_ON_FAIL} seconds...")
+                    sys.stdout.flush()
+                    time.sleep(_SEC_WAIT_ON_FAIL)
+                    continue
             sys.stdout.flush()
             writer.writerow([director_.name, director_.base_url])
             csvfile.flush()

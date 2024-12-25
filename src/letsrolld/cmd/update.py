@@ -5,7 +5,7 @@ import sys
 import time
 import traceback
 
-from sqlalchemy import func, select, or_, and_
+from sqlalchemy import func, select, or_, and_, nullsfirst
 from sqlalchemy.orm import sessionmaker
 
 from letsrolld import db
@@ -53,6 +53,11 @@ def _seen_obj_query(model, seen):
     return model.id.notin_(seen)
 
 
+_MODEL_TO_ORDER_BY = {
+    models.Film: [models.Film.rating.desc()],
+}
+
+
 def get_obj_to_update(session, model, threshold, last_checked_field, seen, match):
     return (
         session.execute(
@@ -61,6 +66,9 @@ def get_obj_to_update(session, model, threshold, last_checked_field, seen, match
                 _get_obj_to_update_query(model, threshold, last_checked_field, match)
             )
             .filter(_seen_obj_query(model, seen))
+            .order_by(
+                nullsfirst(last_checked_field), *(_MODEL_TO_ORDER_BY.get(model, []))
+            )
             .limit(1)
         )
         .scalars()
@@ -198,7 +206,12 @@ def film_threshold(f):
         return multiplier
 
     multiplier = max(0, _NOW.year - year(f)) + 1
-    return min(100, multiplier)
+    if f.rating < 3.0:
+        multiplier *= 2
+        if int(f.rating) != 0:
+            multiplier *= 2
+    multiplier = min(100, multiplier)
+    return multiplier
 
 
 def offer_threshold(f):
@@ -315,6 +328,7 @@ def run_update(
     n_objs = get_number_of_objs_to_update(
         session, model, threshold, last_checked_field, match
     )
+    print(f"Updating {model_name}s: {n_objs} to update")
 
     i = 1
     seen = set()

@@ -242,7 +242,7 @@ def _execute_section_plan(db, config, seen_films):
     if config.min_rating:
         query = query.filter(models.Film.rating >= config.min_rating)
     if config.max_rating:
-        query = query.filter(models.Film.rating <= config.min_rating)
+        query = query.filter(models.Film.rating <= config.max_rating)
 
     if config.min_length:
         query = query.filter(models.Film.runtime >= config.min_length)
@@ -291,7 +291,7 @@ def _execute_section_plan(db, config, seen_films):
     if config.max_year:
         query = query.filter(models.Film.year <= config.max_year)
 
-    query = query.order_by(func.random())
+    query = query.group_by(models.Film.lb_url).order_by(func.random())
     return [_get_film(db.session, f) for f in query.limit(config.max_movies)]
 
 

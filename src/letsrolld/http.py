@@ -5,8 +5,6 @@ from http.client import HTTPConnection
 import requests
 
 
-_CACHE_INSTALLED = False
-
 # TODO: use a library to fill these in
 _HEADERS = {
     "Content-Type": "application/json",
@@ -27,7 +25,7 @@ def enable_debug():
 
 
 def get_url(url):
-    return requests.get(url).text
+    return requests.get(url, timeout=120).text
 
 
 def get_json(url, data):

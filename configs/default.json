@@ -53,5 +53,28 @@
 		"min_rating": "3.75",
 		"min_length": 60,
 		"genre": "documentary"
+	},
+	"Obscure": {
+		"max_movies": 3,
+		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
+		"min_rating": "3.35",
+		"max_rating": "3.75",
+		"min_length": 30,
+		"exclude_genres": ["adult"]
+	},
+	"Adult": {
+		"max_movies": 3,
+		"services": ["DISC", "cultpix"],
+		"min_length": 30,
+		"genre": "adult"
+	},
+	"On Disc": {
+		"max_movies": 3,
+		"exclude_services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
+		"services": ["DISC"],
+		"min_rating": "4.0",
+		"min_length": 30,
+		"max_length": 300,
+		"exclude_genres": ["adult"]
 	}
 }

@@ -34,7 +34,10 @@ class Film(BaseObject):
 
     @functools.cached_property
     def genres(self):
-        return [] if self.jw is None else self.jw.genres
+        genres = [] if self.jw is None else self.jw.genres
+        if self.soup.find("span", class_="badge -adult"):
+            genres.append("adult")
+        return genres
 
     @functools.cached_property
     def genre_names(self):

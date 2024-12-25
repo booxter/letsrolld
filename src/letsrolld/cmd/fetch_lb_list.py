@@ -12,11 +12,7 @@ from letsrolld import lb_list
 # TODO: move to common module, reuse everywhere
 def is_known_film(film_):
     session = sessionmaker(bind=db.create_engine())()
-    film = (
-        session.query(models.Film)
-        .filter(models.Film.lb_url == film_.url)
-        .first()
-    )
+    film = session.query(models.Film).filter(models.Film.lb_url == film_.url).first()
     if film is not None:
         print(f"Skipping known film: {film_.url}")
         sys.stdout.flush()
@@ -27,11 +23,12 @@ def is_known_film(film_):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-u", "--url", help="list URL", required=True)
+    parser.add_argument("-o", "--output", help="output film list file", required=True)
     parser.add_argument(
-        "-o", "--output", help="output film list file", required=True
-    )
-    parser.add_argument(
-        "-N", "--new-only", help="whether to filter out movies already present in db", action="store_true"
+        "-N",
+        "--new-only",
+        help="whether to filter out movies already present in db",
+        action="store_true",
     )
     args = parser.parse_args()
 

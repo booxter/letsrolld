@@ -6,7 +6,6 @@ from letsrolld import http
 
 
 class MovieList(BaseObject):
-
     @property
     def film_urls(self):
         for page in range(1, 10000):
@@ -38,7 +37,6 @@ class MovieList(BaseObject):
 
 
 class MovieCountryList(BaseObject):
-
     def __init__(self, country):
         url = f"https://letterboxd.com/films/ajax/popular/country/{country}"
         super().__init__(url)

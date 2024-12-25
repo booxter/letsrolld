@@ -1,6 +1,5 @@
 import argparse
 import datetime
-from decimal import Decimal
 import math
 import sys
 import time
@@ -67,7 +66,9 @@ def get_obj_to_update(session, model, threshold, last_checked_field, seen, match
                 _get_obj_to_update_query(model, threshold, last_checked_field, match)
             )
             .filter(_seen_obj_query(model, seen))
-            .order_by(nullsfirst(last_checked_field), *(_MODEL_TO_ORDER_BY.get(model, [])))
+            .order_by(
+                nullsfirst(last_checked_field), *(_MODEL_TO_ORDER_BY.get(model, []))
+            )
             .limit(1)
         )
         .scalars()

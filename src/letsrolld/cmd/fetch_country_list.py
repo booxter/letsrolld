@@ -47,5 +47,12 @@ def main():
         writer.writerow(["Name", "Year", "URL"])
 
         for film_ in films:
-            writer.writerow([film_.name, film_.year, film_.url])
+            while True:
+                try:
+                    writer.writerow([film_.name, film_.year, film_.url])
+                    break
+                except Exception:
+                    print(f"Error writing film: {film_.url}")
+                    sys.stdout.flush()
+                    continue
             csvfile.flush()

@@ -27,7 +27,7 @@ _MIN_REFRESH_FREQUENCY = datetime.timedelta(days=180)
 
 _MODEL_TO_THRESHOLD = {
     models.Film: datetime.timedelta(days=7),
-    models.Director: datetime.timedelta(days=3),
+    models.Director: datetime.timedelta(days=7),
 }
 
 
@@ -194,7 +194,7 @@ def director_threshold(d):
 
     current_year = _NOW.year
     for f in films[:2]:
-        multiplier *= max(1, current_year - year(f))
+        multiplier *= max(3, current_year - year(f))
         current_year = year(f)
 
     return multiplier

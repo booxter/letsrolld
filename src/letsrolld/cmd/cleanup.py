@@ -6,11 +6,11 @@ from sqlalchemy.orm import sessionmaker
 from letsrolld import db
 from letsrolld.db import models
 
-#import logging
+# import logging
 #
-#logging.basicConfig()
-#logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
-#logging.getLogger("sqlalchemy").setLevel(logging.DEBUG)
+# logging.basicConfig()
+# logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
+# logging.getLogger("sqlalchemy").setLevel(logging.DEBUG)
 
 
 _REDIRECT_LB_PREFIX = "https://www.letterboxd.com"

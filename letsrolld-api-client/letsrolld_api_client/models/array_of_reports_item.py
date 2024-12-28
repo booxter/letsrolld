@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, TypeVar, Union
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,27 +18,27 @@ class ArrayOfReportsItem:
     Attributes:
         id (int):
         name (str):
-        sections (Union[Unset, List['ArrayOfReportsItemSectionsItem']]):
+        sections (Union[Unset, list['ArrayOfReportsItemSectionsItem']]):
     """
 
     id: int
     name: str
-    sections: Union[Unset, List["ArrayOfReportsItemSectionsItem"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    sections: Union[Unset, list["ArrayOfReportsItemSectionsItem"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
 
-        sections: Union[Unset, List[Dict[str, Any]]] = UNSET
+        sections: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.sections, Unset):
             sections = []
             for sections_item_data in self.sections:
                 sections_item = sections_item_data.to_dict()
                 sections.append(sections_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -52,7 +52,7 @@ class ArrayOfReportsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.array_of_reports_item_sections_item import ArrayOfReportsItemSectionsItem
 
         d = src_dict.copy()
@@ -77,7 +77,7 @@ class ArrayOfReportsItem:
         return array_of_reports_item
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

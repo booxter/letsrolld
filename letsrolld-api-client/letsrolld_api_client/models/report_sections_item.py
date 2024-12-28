@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -15,14 +15,14 @@ class ReportSectionsItem:
     """
     Attributes:
         name (str):
-        films (List['ReportSectionsItemFilmsItem']):
+        films (list['ReportSectionsItemFilmsItem']):
     """
 
     name: str
-    films: List["ReportSectionsItemFilmsItem"]
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    films: list["ReportSectionsItemFilmsItem"]
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         name = self.name
 
         films = []
@@ -30,7 +30,7 @@ class ReportSectionsItem:
             films_item = films_item_data.to_dict()
             films.append(films_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -42,7 +42,7 @@ class ReportSectionsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.report_sections_item_films_item import ReportSectionsItemFilmsItem
 
         d = src_dict.copy()
@@ -64,7 +64,7 @@ class ReportSectionsItem:
         return report_sections_item
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

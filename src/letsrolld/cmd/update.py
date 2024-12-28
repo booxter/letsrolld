@@ -14,6 +14,12 @@ from letsrolld import director as dir_obj
 from letsrolld import film as film_obj
 from letsrolld import http
 
+#import logging
+
+#logging.basicConfig()
+#logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
+#logging.getLogger("sqlalchemy").setLevel(logging.DEBUG)
+
 
 _SEC_WAIT_ON_FAIL = 5
 _LAST_CHECKED_FIELD = "last_checked"
@@ -239,7 +245,13 @@ def refresh_director(session, db_obj, api_obj):
     # don't refresh existing films here
     new_films = [f for f in films if not get_db_film(session, f.url)]
     add_films(session, new_films)
-    db_obj.films = list(get_db_films(session, films))
+
+    if films:
+        db_obj.films = list(get_db_films(session, films))
+        return True
+
+    session.delete(db_obj)
+    return False
 
 
 def report_offer_changes(session, db_obj, api_obj):
@@ -284,6 +296,7 @@ def refresh_film(session, db_obj, api_obj):
         session, {o.technical_name for o in api_obj.available_services}
     )
     db_obj.last_updated = _NOW
+    return True
 
 
 def refresh_offers(session, db_obj, api_obj):
@@ -309,6 +322,7 @@ def refresh_offers(session, db_obj, api_obj):
             )
             session.add(obj)
     db_obj.last_offers_updated = _NOW
+    return True
 
 
 def run_update(
@@ -339,14 +353,15 @@ def run_update(
         else:
             session.commit()
 
-    def loop_housekeeping(session, obj, updated=False):
-        touch_obj(
-            session,
-            obj,
-            last_checked_field,
-            last_updated_field,
-            updated=updated,
-        )
+    def loop_housekeeping(session, obj, touch=True, updated=False):
+        if touch:
+            touch_obj(
+                session,
+                obj,
+                last_checked_field,
+                last_updated_field,
+                updated=updated,
+            )
         if dry_run:
             # build the list of seen objects only when we cannot rely on
             # last_checked fields in db
@@ -374,9 +389,9 @@ def run_update(
             )
 
             api_obj = api_cls(obj.lb_url)
-            refresh_func(session, obj, api_obj)
+            touch = refresh_func(session, obj, api_obj)
 
-            loop_housekeeping(session, obj, updated=True)
+            loop_housekeeping(session, obj, touch=touch, updated=True)
 
     # TODO: is there a better way to extract plural names?
     print(f"No more {model_name}s to update")

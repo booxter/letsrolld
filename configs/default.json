@@ -4,6 +4,7 @@
 		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
 		"min_rating": "3.85",
 		"min_length": 60,
+		"max_length": 275,
 		"exclude_genres": ["documentary", "animation"]
 	},
 	"International": {
@@ -11,6 +12,7 @@
 		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
 		"min_rating": "3.85",
 		"min_length": 60,
+		"max_length": 275,
 		"exclude_genres": ["documentary", "animation"],
 		"exclude_countries": ["USA", "UK", "Canada", "Australia"]
 	},
@@ -20,6 +22,7 @@
 		"min_rating": "3.75",
 		"genre": "horror",
 		"min_length": 60,
+		"max_length": 275,
 		"exclude_genres": ["documentary", "animation"]
 	},
 	"Classics": {
@@ -29,6 +32,7 @@
 		"min_year": 1900,
 		"max_year": 1970,
 		"min_length": 60,
+		"max_length": 275,
 		"exclude_genres": ["documentary", "animation"]
 	},
 	"Animation": {
@@ -36,6 +40,7 @@
 		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
 		"min_rating": "3.75",
 		"min_length": 60,
+		"max_length": 275,
 		"genre": "animation",
 		"exclude_countries": ["Japan"]
 	},
@@ -44,6 +49,7 @@
 		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
 		"min_rating": "3.75",
 		"min_length": 60,
+		"max_length": 275,
 		"genre": "animation",
 		"country": "Japan"
 	},
@@ -52,6 +58,7 @@
 		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
 		"min_rating": "3.75",
 		"min_length": 60,
+		"max_length": 275,
 		"genre": "documentary"
 	},
 	"Obscure": {
@@ -60,12 +67,14 @@
 		"min_rating": "3.35",
 		"max_rating": "3.75",
 		"min_length": 30,
+		"max_length": 275,
 		"exclude_genres": ["adult"]
 	},
 	"Adult": {
 		"max_movies": 3,
 		"services": ["DISC", "cultpix"],
 		"min_length": 30,
+		"max_length": 275,
 		"genre": "adult"
 	},
 	"On Disc": {

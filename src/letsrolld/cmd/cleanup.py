@@ -1,9 +1,16 @@
 import argparse
+import sys
 
 from sqlalchemy.orm import sessionmaker
 
 from letsrolld import db
 from letsrolld.db import models
+
+# import logging
+#
+# logging.basicConfig()
+# logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
+# logging.getLogger("sqlalchemy").setLevel(logging.DEBUG)
 
 
 _REDIRECT_LB_PREFIX = "https://www.letterboxd.com"
@@ -41,27 +48,11 @@ def shorten_lb_urls(session, model, dry_run=False):
             session.rollback()
 
 
-def delete_orphaned_directors(session, model, dry_run=False):
-    try:
-        for director in session.query(model).all():
-            if not director.films:
-                print(
-                    f"Deleting orphaned director: {director.name} @ {director.lb_url}"
-                )
-                session.delete(director)
-    finally:
-        if not dry_run:
-            session.commit()
-        else:
-            session.rollback()
-
-
 def delete_orphaned_films(session, model, dry_run=False):
     try:
-        for film in session.query(model).all():
-            if not film.directors:
-                print(f"Deleting orphaned film: {film.name} @ {film.lb_url}")
-                session.delete(film)
+        for film in session.query(model).filter(~models.Film.directors.any()).all():
+            print(f"Deleting orphaned film: {film.name} @ {film.lb_url}")
+            session.delete(film)
     finally:
         if not dry_run:
             session.commit()
@@ -131,10 +122,6 @@ _CLEANUP = [
         models.Offer,
         delete_orphaned_offers,
     ),
-    (
-        models.Director,
-        delete_orphaned_directors,
-    ),
     # (
     #     models.Film,
     #     nullify_zero_years,
@@ -153,8 +140,10 @@ def main():
 
     engine = db.create_engine()
 
-    for cleanup in _CLEANUP:
+    for i, cleanup in enumerate(_CLEANUP):
         model, cleanup_func = cleanup
+        print(f"{i}: Running cleanup for {model}")
+        sys.stdout.flush()
         cleanup_func(sessionmaker(bind=engine)(), model, dry_run=args.dry_run)
 
 

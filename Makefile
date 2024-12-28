@@ -44,7 +44,7 @@ run-update-services:
 run-cleanup:
 	pdm run cleanup $(ARGS) | $(RUN_LOG_CMD)
 
-run-all: populate-directors run-update-directors run-update-films run-update-offers run-update-services run-cleanup dump-directors
+run-all: run-update-directors run-update-films run-update-offers run-update-services run-cleanup dump-directors
 
 run-db-upgrade:
 	pdm run alembic upgrade head

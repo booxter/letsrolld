@@ -116,7 +116,7 @@ export default class Movie {
 
         const title = this.createMovieElemText("h1", "movie-title", this.title);
         const year = this.createMovieElemText("h2", "movie-year", this.year);
-        const director = this.createDirectorsList(this.directors);
+        const director = this.createDirectorsList(this.directors.map(d => d.name));
         const rating = this.createMovieElemText("h3", "movie-rating", this.rating);
         const runtime = this.createMovieElemText("h4", "movie-runtime", this.runtime? `${this.runtime} min` : "");
         const description = this.createMovieElemText("p", "movie-description", this.description);

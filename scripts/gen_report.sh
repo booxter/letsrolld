@@ -21,7 +21,7 @@ outfile=$1
 # Make sure the latest code is installed in python env.
 flox activate -- make install
 
-# Accept a parameter --start-server to start the server before sending the email.
+# Accept a parameter -s to start the server before sending the email.
 if [ $start_server -eq 1 ]; then
   flox activate -- make webapp &
   trap 'kill %1' EXIT

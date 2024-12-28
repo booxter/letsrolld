@@ -53,7 +53,7 @@ webapp: install
 	pdm run webapp
 
 email: install
-	./scripts/email.sh --start-server
+	./scripts/email.sh
 
 swagger:
 	#curl http://localhost:8000/api/doc/swagger.json -o swagger.json

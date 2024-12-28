@@ -25,7 +25,10 @@ flox activate -- make install
 if [ $start_server -eq 1 ]; then
   flox activate -- make webapp &
   trap 'kill %1' EXIT
-  sleep 10 # Wait for the server to start.
+  # Wait for the server to start. TODO: don't hardcode the url?
+  while ! curl -s http://localhost:8000/ > /dev/null; do
+    sleep 1
+  done
 fi
 
 flox activate -- lcli report render --name default > "$outfile"

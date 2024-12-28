@@ -387,6 +387,7 @@ def parse_args():
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--profile", action="store_true")
     parser.add_argument("--match")
     return parser.parse_args()
 
@@ -407,32 +408,42 @@ def main(
 
     if args.debug:
         http.enable_debug()
+    if args.profile:
+        import cProfile
 
-    while True:
-        try:
-            threshold = (
-                datetime.timedelta(0)
-                if (args.force or args.match)
-                else _MODEL_TO_THRESHOLD[model]
-            )
-            run_update(
-                get_session(),
-                model,
-                api_cls,
-                refresh_func,
-                threshold_func,
-                threshold,
-                last_checked_field,
-                last_updated_field,
-                dry_run=args.dry_run,
-                match=args.match,
-            )
-            break
-        except Exception as e:
-            traceback.print_exception(e)
-            print(f"Retrying in {_SEC_WAIT_ON_FAIL} seconds...")
-            time.sleep(_SEC_WAIT_ON_FAIL)
-            continue
+        pr = cProfile.Profile()
+        pr.enable()
+
+    try:
+        while True:
+            try:
+                threshold = (
+                    datetime.timedelta(0)
+                    if (args.force or args.match)
+                    else _MODEL_TO_THRESHOLD[model]
+                )
+                run_update(
+                    get_session(),
+                    model,
+                    api_cls,
+                    refresh_func,
+                    threshold_func,
+                    threshold,
+                    last_checked_field,
+                    last_updated_field,
+                    dry_run=args.dry_run,
+                    match=args.match,
+                )
+                break
+            except Exception as e:
+                traceback.print_exception(e)
+                print(f"Retrying in {_SEC_WAIT_ON_FAIL} seconds...")
+                time.sleep(_SEC_WAIT_ON_FAIL)
+                continue
+    finally:
+        if args.profile:
+            pr.disable()
+            pr.dump_stats("./stats")
 
 
 def directors_main():

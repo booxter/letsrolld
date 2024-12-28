@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import TYPE_CHECKING, Any, TypeVar, Union, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -27,10 +27,10 @@ class DirectorFilmsItem:
         lb_url (Union[Unset, str]):
         jw_url (Union[None, Unset, str]):
         trailer_url (Union[None, Unset, str]):
-        genres (Union[Unset, List[str]]):
-        countries (Union[Unset, List['DirectorFilmsItemCountriesItem']]):
-        offers (Union[Unset, List['DirectorFilmsItemOffersItem']]):
-        directors (Union[Unset, List['DirectorFilmsItemDirectorsItem']]):
+        genres (Union[Unset, list[str]]):
+        countries (Union[Unset, list['DirectorFilmsItemCountriesItem']]):
+        offers (Union[Unset, list['DirectorFilmsItemOffersItem']]):
+        directors (Union[Unset, list['DirectorFilmsItemDirectorsItem']]):
     """
 
     title: str
@@ -42,13 +42,13 @@ class DirectorFilmsItem:
     lb_url: Union[Unset, str] = UNSET
     jw_url: Union[None, Unset, str] = UNSET
     trailer_url: Union[None, Unset, str] = UNSET
-    genres: Union[Unset, List[str]] = UNSET
-    countries: Union[Unset, List["DirectorFilmsItemCountriesItem"]] = UNSET
-    offers: Union[Unset, List["DirectorFilmsItemOffersItem"]] = UNSET
-    directors: Union[Unset, List["DirectorFilmsItemDirectorsItem"]] = UNSET
-    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
+    genres: Union[Unset, list[str]] = UNSET
+    countries: Union[Unset, list["DirectorFilmsItemCountriesItem"]] = UNSET
+    offers: Union[Unset, list["DirectorFilmsItemOffersItem"]] = UNSET
+    directors: Union[Unset, list["DirectorFilmsItemDirectorsItem"]] = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         title = self.title
 
         id = self.id
@@ -83,32 +83,32 @@ class DirectorFilmsItem:
         else:
             trailer_url = self.trailer_url
 
-        genres: Union[Unset, List[str]] = UNSET
+        genres: Union[Unset, list[str]] = UNSET
         if not isinstance(self.genres, Unset):
             genres = self.genres
 
-        countries: Union[Unset, List[Dict[str, Any]]] = UNSET
+        countries: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.countries, Unset):
             countries = []
             for countries_item_data in self.countries:
                 countries_item = countries_item_data.to_dict()
                 countries.append(countries_item)
 
-        offers: Union[Unset, List[Dict[str, Any]]] = UNSET
+        offers: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.offers, Unset):
             offers = []
             for offers_item_data in self.offers:
                 offers_item = offers_item_data.to_dict()
                 offers.append(offers_item)
 
-        directors: Union[Unset, List[Dict[str, Any]]] = UNSET
+        directors: Union[Unset, list[dict[str, Any]]] = UNSET
         if not isinstance(self.directors, Unset):
             directors = []
             for directors_item_data in self.directors:
                 directors_item = directors_item_data.to_dict()
                 directors.append(directors_item)
 
-        field_dict: Dict[str, Any] = {}
+        field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
@@ -143,7 +143,7 @@ class DirectorFilmsItem:
         return field_dict
 
     @classmethod
-    def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+    def from_dict(cls: type[T], src_dict: dict[str, Any]) -> T:
         from ..models.director_films_item_countries_item import DirectorFilmsItemCountriesItem
         from ..models.director_films_item_directors_item import DirectorFilmsItemDirectorsItem
         from ..models.director_films_item_offers_item import DirectorFilmsItemOffersItem
@@ -195,7 +195,7 @@ class DirectorFilmsItem:
 
         trailer_url = _parse_trailer_url(d.pop("trailer_url", UNSET))
 
-        genres = cast(List[str], d.pop("genres", UNSET))
+        genres = cast(list[str], d.pop("genres", UNSET))
 
         countries = []
         _countries = d.pop("countries", UNSET)
@@ -238,7 +238,7 @@ class DirectorFilmsItem:
         return director_films_item
 
     @property
-    def additional_keys(self) -> List[str]:
+    def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
     def __getitem__(self, key: str) -> Any:

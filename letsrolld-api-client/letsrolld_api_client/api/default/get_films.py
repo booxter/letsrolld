@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -15,8 +15,8 @@ def _get_kwargs(
     genre: Union[Unset, str] = UNSET,
     country: Union[Unset, str] = UNSET,
     offer: Union[Unset, str] = UNSET,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["limit"] = limit
 
@@ -28,7 +28,7 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/films",
         "params": params,
@@ -39,7 +39,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[List["ArrayOfFilmsItem"]]:
+) -> Optional[list["ArrayOfFilmsItem"]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -59,7 +59,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[List["ArrayOfFilmsItem"]]:
+) -> Response[list["ArrayOfFilmsItem"]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -75,7 +75,7 @@ def sync_detailed(
     genre: Union[Unset, str] = UNSET,
     country: Union[Unset, str] = UNSET,
     offer: Union[Unset, str] = UNSET,
-) -> Response[List["ArrayOfFilmsItem"]]:
+) -> Response[list["ArrayOfFilmsItem"]]:
     """Get Films
 
     Args:
@@ -89,7 +89,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[List['ArrayOfFilmsItem']]
+        Response[list['ArrayOfFilmsItem']]
     """
 
     kwargs = _get_kwargs(
@@ -113,7 +113,7 @@ def sync(
     genre: Union[Unset, str] = UNSET,
     country: Union[Unset, str] = UNSET,
     offer: Union[Unset, str] = UNSET,
-) -> Optional[List["ArrayOfFilmsItem"]]:
+) -> Optional[list["ArrayOfFilmsItem"]]:
     """Get Films
 
     Args:
@@ -127,7 +127,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        List['ArrayOfFilmsItem']
+        list['ArrayOfFilmsItem']
     """
 
     return sync_detailed(
@@ -146,7 +146,7 @@ async def asyncio_detailed(
     genre: Union[Unset, str] = UNSET,
     country: Union[Unset, str] = UNSET,
     offer: Union[Unset, str] = UNSET,
-) -> Response[List["ArrayOfFilmsItem"]]:
+) -> Response[list["ArrayOfFilmsItem"]]:
     """Get Films
 
     Args:
@@ -160,7 +160,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[List['ArrayOfFilmsItem']]
+        Response[list['ArrayOfFilmsItem']]
     """
 
     kwargs = _get_kwargs(
@@ -182,7 +182,7 @@ async def asyncio(
     genre: Union[Unset, str] = UNSET,
     country: Union[Unset, str] = UNSET,
     offer: Union[Unset, str] = UNSET,
-) -> Optional[List["ArrayOfFilmsItem"]]:
+) -> Optional[list["ArrayOfFilmsItem"]]:
     """Get Films
 
     Args:
@@ -196,7 +196,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        List['ArrayOfFilmsItem']
+        list['ArrayOfFilmsItem']
     """
 
     return (

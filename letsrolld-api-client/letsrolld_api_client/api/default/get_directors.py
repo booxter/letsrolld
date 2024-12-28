@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -12,14 +12,14 @@ from ...types import UNSET, Response, Unset
 def _get_kwargs(
     *,
     limit: Union[Unset, int] = 10,
-) -> Dict[str, Any]:
-    params: Dict[str, Any] = {}
+) -> dict[str, Any]:
+    params: dict[str, Any] = {}
 
     params["limit"] = limit
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    _kwargs: Dict[str, Any] = {
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/directors",
         "params": params,
@@ -30,7 +30,7 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[List["ArrayOfDirectorsItem"]]:
+) -> Optional[list["ArrayOfDirectorsItem"]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -50,7 +50,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[List["ArrayOfDirectorsItem"]]:
+) -> Response[list["ArrayOfDirectorsItem"]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,7 +63,7 @@ def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     limit: Union[Unset, int] = 10,
-) -> Response[List["ArrayOfDirectorsItem"]]:
+) -> Response[list["ArrayOfDirectorsItem"]]:
     """Get Directors
 
     Args:
@@ -74,7 +74,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[List['ArrayOfDirectorsItem']]
+        Response[list['ArrayOfDirectorsItem']]
     """
 
     kwargs = _get_kwargs(
@@ -92,7 +92,7 @@ def sync(
     *,
     client: Union[AuthenticatedClient, Client],
     limit: Union[Unset, int] = 10,
-) -> Optional[List["ArrayOfDirectorsItem"]]:
+) -> Optional[list["ArrayOfDirectorsItem"]]:
     """Get Directors
 
     Args:
@@ -103,7 +103,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        List['ArrayOfDirectorsItem']
+        list['ArrayOfDirectorsItem']
     """
 
     return sync_detailed(
@@ -116,7 +116,7 @@ async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
     limit: Union[Unset, int] = 10,
-) -> Response[List["ArrayOfDirectorsItem"]]:
+) -> Response[list["ArrayOfDirectorsItem"]]:
     """Get Directors
 
     Args:
@@ -127,7 +127,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[List['ArrayOfDirectorsItem']]
+        Response[list['ArrayOfDirectorsItem']]
     """
 
     kwargs = _get_kwargs(
@@ -143,7 +143,7 @@ async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
     limit: Union[Unset, int] = 10,
-) -> Optional[List["ArrayOfDirectorsItem"]]:
+) -> Optional[list["ArrayOfDirectorsItem"]]:
     """Get Directors
 
     Args:
@@ -154,7 +154,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        List['ArrayOfDirectorsItem']
+        list['ArrayOfDirectorsItem']
     """
 
     return (

@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Optional, Union
 
 import httpx
 
@@ -9,8 +9,8 @@ from ...models.array_of_reports_item import ArrayOfReportsItem
 from ...types import Response
 
 
-def _get_kwargs() -> Dict[str, Any]:
-    _kwargs: Dict[str, Any] = {
+def _get_kwargs() -> dict[str, Any]:
+    _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/reports",
     }
@@ -20,7 +20,7 @@ def _get_kwargs() -> Dict[str, Any]:
 
 def _parse_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Optional[List["ArrayOfReportsItem"]]:
+) -> Optional[list["ArrayOfReportsItem"]]:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json()
@@ -40,7 +40,7 @@ def _parse_response(
 
 def _build_response(
     *, client: Union[AuthenticatedClient, Client], response: httpx.Response
-) -> Response[List["ArrayOfReportsItem"]]:
+) -> Response[list["ArrayOfReportsItem"]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,7 +52,7 @@ def _build_response(
 def sync_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[List["ArrayOfReportsItem"]]:
+) -> Response[list["ArrayOfReportsItem"]]:
     """List Reports
 
     Raises:
@@ -60,7 +60,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[List['ArrayOfReportsItem']]
+        Response[list['ArrayOfReportsItem']]
     """
 
     kwargs = _get_kwargs()
@@ -75,7 +75,7 @@ def sync_detailed(
 def sync(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[List["ArrayOfReportsItem"]]:
+) -> Optional[list["ArrayOfReportsItem"]]:
     """List Reports
 
     Raises:
@@ -83,7 +83,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        List['ArrayOfReportsItem']
+        list['ArrayOfReportsItem']
     """
 
     return sync_detailed(
@@ -94,7 +94,7 @@ def sync(
 async def asyncio_detailed(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Response[List["ArrayOfReportsItem"]]:
+) -> Response[list["ArrayOfReportsItem"]]:
     """List Reports
 
     Raises:
@@ -102,7 +102,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[List['ArrayOfReportsItem']]
+        Response[list['ArrayOfReportsItem']]
     """
 
     kwargs = _get_kwargs()
@@ -115,7 +115,7 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: Union[AuthenticatedClient, Client],
-) -> Optional[List["ArrayOfReportsItem"]]:
+) -> Optional[list["ArrayOfReportsItem"]]:
     """List Reports
 
     Raises:
@@ -123,7 +123,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        List['ArrayOfReportsItem']
+        list['ArrayOfReportsItem']
     """
 
     return (

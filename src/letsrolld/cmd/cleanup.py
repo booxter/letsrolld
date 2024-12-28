@@ -1,9 +1,16 @@
 import argparse
+import sys
 
 from sqlalchemy.orm import sessionmaker
 
 from letsrolld import db
 from letsrolld.db import models
+
+#import logging
+#
+#logging.basicConfig()
+#logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
+#logging.getLogger("sqlalchemy").setLevel(logging.DEBUG)
 
 
 _REDIRECT_LB_PREFIX = "https://www.letterboxd.com"
@@ -154,8 +161,10 @@ def main():
 
     engine = db.create_engine()
 
-    for cleanup in _CLEANUP:
+    for i, cleanup in enumerate(_CLEANUP):
         model, cleanup_func = cleanup
+        print(f"{i}: Running cleanup for {model}")
+        sys.stdout.flush()
         cleanup_func(sessionmaker(bind=engine)(), model, dry_run=args.dry_run)
 
 

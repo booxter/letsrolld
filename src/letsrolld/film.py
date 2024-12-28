@@ -107,15 +107,37 @@ class Film(BaseObject):
             return link
 
     @functools.cached_property
-    def runtime(self):
-        # first, try (structured) justwatch data
-        if self.jw is not None:
-            return self.jw.runtime_minutes
-        # fall back to letterboxd html
+    def multi_episode(self):
+        if not self._jw_runtime:
+            return False
+        if not self._lb_runtime:
+            return False
+        # heuristic is: if runtimes are vastly different, it's a series
+        # though we usually only see jw runtime shorter, handle both
+        return ((self._lb_runtime / self._jw_runtime) > 1.5) or (
+            (self._jw_runtime / self._lb_runtime) > 1.5
+        )
+
+    @functools.cached_property
+    def _lb_runtime(self):
         for p in self.soup.find_all("p", class_="text-link text-footer"):
             match = re.search(r"(\d+)\smins", p.text)
             if match:
                 return int(match.group(1))
+
+    @functools.cached_property
+    def _jw_runtime(self):
+        if self.jw is not None:
+            return self.jw.runtime_minutes
+
+    @functools.cached_property
+    def runtime(self):
+        jw_runtime = self._jw_runtime
+        lb_runtime = self._lb_runtime
+        if self.multi_episode:
+            return max(jw_runtime, lb_runtime)
+        # prefer jw runtime if available
+        return jw_runtime or lb_runtime
 
     @functools.cached_property
     def _full_title(self):

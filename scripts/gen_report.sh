@@ -24,7 +24,7 @@ flox activate -- make install
 # Accept a parameter -s to start the server before sending the email.
 if [ $start_server -eq 1 ]; then
   flox activate -- make webapp &
-  trap 'kill %1' EXIT
+  trap 'killall webapp' SIGINT SIGTERM EXIT # This is ugly and may affect other services
   # Wait for the server to start. TODO: don't hardcode the url?
   while ! curl -s http://localhost:8000/ > /dev/null; do
     sleep 1

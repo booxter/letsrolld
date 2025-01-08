@@ -1,4 +1,5 @@
 *.sqlite
+backup/*
 *.db
 */__pycache__/
 *.pyc

@@ -61,6 +61,13 @@
 		"max_length": 275,
 		"genre": "documentary"
 	},
+	"Shorts": {
+		"max_movies": 5,
+		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
+		"min_rating": "3.5",
+		"min_length": 50,
+		"max_length": 70
+	},
 	"Obscure": {
 		"max_movies": 3,
 		"services": ["FREE", "ADS", "FLATRATE", "RENT", "BUY"],
